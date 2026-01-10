@@ -69,6 +69,14 @@ export class User {
     return this.#errors.length === 0;
   }
 
+  encryptPassword(encryptFunction) {
+    this.#password = encryptFunction(this.#password);
+  }
+
+  comparePassword(compareFunction, plainPassword) {
+    return compareFunction(this.#password, plainPassword);
+  }
+
   static create({ name, email, password }) {
     return new User({ id: generateUUID(), name, email, password });
   }

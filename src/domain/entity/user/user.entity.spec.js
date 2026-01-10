@@ -1,3 +1,7 @@
+import {
+  comparePassword,
+  encryptPassword,
+} from "../../../helpers/password-hash.js";
 import { User } from "./user.entity.js";
 
 describe("User Entity", () => {
@@ -42,5 +46,18 @@ describe("User Entity", () => {
         context: { field: "password" },
       },
     ]);
+  });
+
+  it("should encrypt and compare password correctly", () => {
+    const user = User.create({
+      name: "Jane Doe",
+      email: "jane.doe@example.com",
+      password: "password123",
+    });
+
+    user.encryptPassword(encryptPassword);
+
+    expect(user.password).not.toBe("password123");
+    expect(user.comparePassword(comparePassword, "password123")).toBe(true);
   });
 });
