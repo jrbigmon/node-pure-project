@@ -17,6 +17,8 @@ describe("User Entity", () => {
       name: "John Doe",
       email: "john.doe@example.com",
       password: "password123",
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
     });
   });
 

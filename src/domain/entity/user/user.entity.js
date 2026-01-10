@@ -6,13 +6,17 @@ export class User {
   #name;
   #email;
   #password;
+  #createdAt;
+  #updatedAt;
   #errors = [];
 
-  constructor({ id, name, email, password }) {
+  constructor({ id, name, email, password, createdAt, updatedAt }) {
     this.#id = id;
     this.#name = name.trim();
     this.#email = email.trim().toLowerCase();
     this.#password = password.trim();
+    this.#createdAt = createdAt;
+    this.#updatedAt = updatedAt;
   }
 
   get id() {
@@ -29,6 +33,14 @@ export class User {
 
   get password() {
     return this.#password;
+  }
+
+  get createdAt() {
+    return this.#createdAt;
+  }
+
+  get updatedAt() {
+    return this.#updatedAt;
   }
 
   get errors() {
@@ -78,6 +90,13 @@ export class User {
   }
 
   static create({ name, email, password }) {
-    return new User({ id: generateUUID(), name, email, password });
+    return new User({
+      id: generateUUID(),
+      name,
+      email,
+      password,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
   }
 }
