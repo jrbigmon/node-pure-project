@@ -1,5 +1,5 @@
-import { generateUUID } from "../../helpers/uuid";
-import { EntityException } from "../exception/entity/entity.exception";
+import { generateUUID } from "../../../helpers/uuid.js";
+import { EntityException } from "../../exception/entity.exception.js";
 
 export class User {
   #id;
@@ -52,6 +52,16 @@ export class User {
           message: "Valid email is required",
           entity: "User",
           context: { field: "email", value: this.#email },
+        })
+      );
+    }
+
+    if (!this.#password) {
+      this.#errors.push(
+        new EntityException({
+          message: "Password is required",
+          entity: "User",
+          context: { field: "password" },
         })
       );
     }
