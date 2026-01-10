@@ -1,4 +1,7 @@
-export const getUserUseCase = async (userId, userRepository) => {
+import { EntityException } from "../../exception/entity.exception";
+import { NotFoundException } from "../../exception/not-found.exception";
+
+export const getUserUseCase = (userRepository) => async (userId) => {
   const user = await userRepository.findById(userId);
 
   if (!user) {
