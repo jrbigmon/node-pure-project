@@ -1,6 +1,6 @@
-import { User } from "../../entity/user/user.entity";
-import { BadRequestException } from "../../exception/bad-request.exception";
-import { createUserUseCase } from "./create-user.usecase";
+import { User } from "../../entity/user/user.entity.js";
+import { BadRequestException } from "../../exception/bad-request.exception.js";
+import { createUserUseCase } from "./create-user.usecase.js";
 import jest from "jest-mock";
 
 describe("createUserUseCase", () => {
