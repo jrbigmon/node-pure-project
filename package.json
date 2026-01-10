@@ -1,5 +1,9 @@
 {
   "name": "node-study",
   "packageManager": "yarn@4.12.0",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/main.js",
+    "start:dev": "node --watch ./src/main.js"
+  }
 }
