@@ -1,7 +1,7 @@
 import { getUsersController } from "./get-users.controller.js";
 import { createUserController } from "./create-user.controller.js";
 
-export const userControllers = {
+export const UserController = {
   "GET:/users": getUsersController,
   "POST:/users": createUserController,
 };
