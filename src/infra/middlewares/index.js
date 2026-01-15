@@ -1,4 +1,6 @@
-export const compose = (middlewares) => async (req, res, finalHandler) => {
+import { getBody } from "./get-body.middleware.js";
+
+const compose = (middlewares) => async (req, res, finalHandler) => {
   let index = -1;
 
   async function dispatch(i) {
@@ -16,3 +18,7 @@ export const compose = (middlewares) => async (req, res, finalHandler) => {
 
   await dispatch(0);
 };
+
+const middlewares = compose([getBody]);
+
+export { middlewares };

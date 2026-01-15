@@ -1,14 +1,13 @@
 import http from "node:http";
 import { httpExceptionHandler } from "./infra/exceptions/http/handle-http.exception.js";
 import { controllers } from "./infra/controllers/index.js";
-import { compose as middlewares } from "./infra/middlewares/compose.js";
-import { getBody } from "./infra/middlewares/get-body.middleware.js";
+import { middlewares } from "./infra/middlewares/index.js";
 
 const bootstrap = ({ port }) => {
   http
     .createServer(async (req, res) => {
       try {
-        await middlewares([getBody])(req, res);
+        await middlewares(req, res);
         await controllers({ req, res })(req, res);
       } catch (error) {
         return httpExceptionHandler({ error, req, res });
