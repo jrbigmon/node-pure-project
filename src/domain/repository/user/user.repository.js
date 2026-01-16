@@ -18,4 +18,8 @@ export class UserRepository {
   existsByEmail(_email) {
     throw new Error("Method not implemented.");
   }
+
+  delete(_id) {
+    throw new Error("Method not implemented.");
+  }
 }

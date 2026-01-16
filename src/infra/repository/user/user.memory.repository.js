@@ -34,4 +34,11 @@ export class UserMemoryRepository extends UserRepository {
       resolve(users);
     });
   }
+
+  delete(id) {
+    return new Promise((resolve) => {
+      this.database.users.delete(id);
+      resolve();
+    });
+  }
 }
