@@ -2,8 +2,14 @@ import http from "node:http";
 import { httpExceptionHandler } from "./infra/exceptions/http/handle-http.exception.js";
 import { controllers } from "./infra/controllers/index.js";
 import { middlewares } from "./infra/middlewares/index.js";
+import dotenv from "dotenv";
+import { PostgresDatabase } from "./infra/database/db.pg.js";
+dotenv.config();
 
-const bootstrap = ({ port }) => {
+const bootstrap = async ({ port }) => {
+  await PostgresDatabase.connected();
+  await PostgresDatabase.init({ runMigration: true });
+
   http
     .createServer(async (req, res) => {
       try {
