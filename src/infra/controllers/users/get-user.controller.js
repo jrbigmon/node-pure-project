@@ -6,8 +6,6 @@ import { UserMemoryRepository } from "../../repository/user/user.memory.reposito
 export const getUserController = async (req, res) => {
   const { id = "" } = req.params ?? {};
 
-  console.log(req.params);
-
   const user = await UserService.findById({
     userRepository: new UserMemoryRepository(databaseMemory),
     useCase: getUserUseCase,
