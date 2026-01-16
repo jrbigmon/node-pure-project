@@ -1,0 +1,12 @@
+.pnp.cjs
+.pnp.loader.mjs
+node_modules
+.git
+.gitignore
+README.md
+DOCUMENTATION.md
+DEVELOPMENT_GUIDE.md
+BEST_PRACTICES.md
+SWAGGER_SETUP.md
+DEPLOYMENT.md
+coverage

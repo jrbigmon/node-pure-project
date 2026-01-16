@@ -5,11 +5,13 @@
   "scripts": {
     "start": "node ./src/main.js",
     "start:dev": "node --watch ./src/main.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules yarn jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules yarn jest",
+    "create:migration": "node ./src/infra/database/scripts/create.migrations.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "postgres": "^3.4.8"
+    "dotenv": "^17.2.3",
+    "pg": "^8.17.1"
   },
   "devDependencies": {
     "jest": "^30.2.0",
