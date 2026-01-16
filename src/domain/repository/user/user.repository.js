@@ -7,7 +7,7 @@ export class UserRepository {
     throw new Error("Method not implemented.");
   }
 
-  findById(id) {
+  findById(_id) {
     throw new Error("Method not implemented.");
   }
 
@@ -15,7 +15,7 @@ export class UserRepository {
     throw new Error("Method not implemented.");
   }
 
-  existsByEmail(email) {
+  existsByEmail(_email) {
     throw new Error("Method not implemented.");
   }
 }

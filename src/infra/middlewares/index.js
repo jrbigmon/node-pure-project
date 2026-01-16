@@ -13,7 +13,7 @@ const compose = (middlewares) => async (req, res, finalHandler) => {
 
     if (!fn) return;
 
-    await fn(req, res, () => dispatch(i + 1));
+    await fn(req, res, async () => await dispatch(i + 1));
   }
 
   await dispatch(0);

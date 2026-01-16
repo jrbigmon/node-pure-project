@@ -1,6 +1,6 @@
 import { BadRequestException } from "../../domain/exception/bad-request.exception.js";
 
-export function getBody(req) {
+export function getBody(req, _res, next) {
   return new Promise((resolve, reject) => {
     let body = "";
 
@@ -9,6 +9,7 @@ export function getBody(req) {
       try {
         req.body = body ? JSON.parse(body) : {};
         resolve(req.body);
+        next?.();
       } catch {
         reject(new BadRequestException("Invalid JSON body"));
       }
