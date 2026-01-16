@@ -1,8 +1,10 @@
 import { extractParams } from "../../helpers/extract-params.js";
 import { UserController } from "./users/index.js";
+import { DocsController } from "./docs/docs.controller.js";
 
 export const controllers = ({ req, res: _res }) => {
   const routes = {
+    ...DocsController,
     ...UserController,
     DEFAULT: (_req, res) => {
       return new Promise((resolve) => {
@@ -16,14 +18,18 @@ export const controllers = ({ req, res: _res }) => {
   const { method, url } = req;
   const routeKey = `(${method.toUpperCase()})${url}`;
 
-  for (const [route, fn] of Object.entries(routes)) {
-    if (route === routeKey) return fn;
+  if (routes[routeKey]) {
+    return routes[routeKey];
+  }
 
-    const method = route.match(/^\((.*?)\)/)?.[1];
+  for (const [route, fn] of Object.entries(routes)) {
+    if (route === "DEFAULT") continue;
+
+    const routeMethod = route.match(/^\((.*?)\)/)?.[1];
     const routeWithoutMethod = route.replace(/^\(.*?\)/, "");
     const params = extractParams(routeWithoutMethod, url);
 
-    if (params && method === req.method) {
+    if (params && routeMethod === req.method) {
       req.params = params;
       return fn;
     }
