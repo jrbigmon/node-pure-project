@@ -7,8 +7,13 @@ import { PostgresDatabase } from "./infra/database/db.pg.js";
 dotenv.config();
 
 const bootstrap = async ({ port }) => {
-  await PostgresDatabase.connected();
-  await PostgresDatabase.init({ runMigration: true });
+  try {
+    await PostgresDatabase.connected();
+    await PostgresDatabase.init({ runMigration: true });
+  } catch (error) {
+    console.error("Error during database initialization:", error);
+    process.exit(1);
+  }
 
   http
     .createServer(async (req, res) => {
@@ -22,6 +27,16 @@ const bootstrap = async ({ port }) => {
     .listen(port ?? 3000)
     .on("listening", () => {
       console.log(`Server is running on http://localhost:${port}`);
+    })
+    .on("error", async (error) => {
+      console.error("Error starting server:", error);
+      await PostgresDatabase.down();
+      process.exit(1);
+    })
+    .on("close", async () => {
+      console.error("Closed server");
+      await PostgresDatabase.down();
+      process.exit(1);
     });
 };
 

@@ -74,10 +74,15 @@ const init = async ({ runMigration = false }) => {
   await Promise.all(promises);
 };
 
+const down = async () => {
+  await pool.end();
+};
+
 export const PostgresDatabase = {
   query: (text, params) => pool.query(text, params),
   connected,
   init,
+  down,
   migrations: {
     up: runMigrations,
     down: async () => {
